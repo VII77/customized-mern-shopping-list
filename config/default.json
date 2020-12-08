@@ -1,0 +1,4 @@
+{
+    "mongoURI": "mongodb+srv://admin:admin@cluster0.ykzbt.mongodb.net/shop-app?retryWrites=true&w=majority",
+    "jwtSecret": "sl_myJwtSecret"
+}
