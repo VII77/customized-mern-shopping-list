@@ -12,7 +12,7 @@ const User = require('../../models/User');
 // @route   POST api/auth
 // @desc    Auth user
 // @access  Public
-router.post('/', (req, res) => {
+router.post('/login', (req, res) => {
   const { email, password } = req.body;
 
   // Simple validation
@@ -31,7 +31,7 @@ router.post('/', (req, res) => {
           if(!isMatch) return res.status(400).json({ msg: 'Invalid credentials' });
 
           jwt.sign(
-            { id: user.id },
+            { id: user.id, role: user.role },
             config.get('jwtSecret'),
             { expiresIn: 3600 },
             (err, token) => {
@@ -41,7 +41,8 @@ router.post('/', (req, res) => {
                 user: {
                   id: user.id,
                   name: user.name,
-                  email: user.email
+                  email: user.email,
+                  role: user.role
                 }
               });
             }
@@ -50,13 +51,71 @@ router.post('/', (req, res) => {
     })
 });
 
-// @route   GET api/auth/user
-// @desc    Get user data
-// @access  Private
-router.get('/user', auth, (req, res) => {
-  User.findById(req.user.id)
-    .select('-password')
-    .then(user => res.json(user));
+// @route   POST api/users
+// @desc    Register new user
+// @access  Public
+router.post('/register', (req, res) => {
+  const { name, email, password } = req.body;
+
+  // Simple validation
+  if(!name || !email || !password) {
+    return res.status(400).json({ msg: 'Please enter all fields' });
+  }
+
+  // Check for existing user
+  User.findOne({ email })
+    .then(user => {
+      if(user) return res.status(400).json({ msg: 'User already exists' });
+
+      const newUser = new User({
+        name,
+        email,
+        password
+      });
+
+      // Create salt & hash
+      bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(newUser.password, salt, (err, hash) => {
+          if(err) throw err;
+          newUser.password = hash;
+          newUser.save()
+            .then(user => {
+              jwt.sign(
+                { id: user.id },
+                config.get('jwtSecret'),
+                { expiresIn: 3600 },
+                (err, token) => {
+                  if(err) throw err;
+                  res.json({
+                    token,
+                    user: {
+                      id: user.id,
+                      name: user.name,
+                      email: user.email
+                    }
+                  });
+                }
+              )
+            });
+        })
+      })
+    })
+});
+
+router.patch('/updateRole', (req, res) => {
+  const { _id, role } = req.body;
+  User.findOneAndUpdate({_id}, { $set: {role: role} }, { upsert: true, new: true }, user => {
+    if(!user) return res.status(400).json({ msg: 'Update failed' });
+
+    res.json({
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email, 
+        role: user.role
+      }
+    });
+  });
 });
 
 module.exports = router;

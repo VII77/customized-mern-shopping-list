@@ -11,7 +11,7 @@ const User = require('../../models/User');
 // @route   POST api/users
 // @desc    Register new user
 // @access  Public
-router.post('/', (req, res) => {
+router.post('/register', (req, res) => {
   const { name, email, password } = req.body;
 
   // Simple validation
@@ -57,6 +57,22 @@ router.post('/', (req, res) => {
         })
       })
     })
+});
+
+router.patch('/setRole', (req, res) => {
+  const { _id, role } = req.body;
+  User.findOneAndUpdate({_id}, { $set: {role: role} }, { upsert: true, new: true }, user => {
+    if(!user) return res.status(400).json({ msg: 'Update failed' });
+
+    res.json({
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email, 
+        role: user.role
+      }
+    });
+  });
 });
 
 module.exports = router;
