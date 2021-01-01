@@ -1,0 +1,58 @@
+.mat-column-number {
+  width: 5% !important;
+}
+.mat-column-name {
+  width: 30%;
+}
+
+.mat-column-role {
+  width: 30%;
+}
+
+.mat-column-action {
+  width: 30%;
+}
+
+.assign-role-button {
+  width: 150px !important;
+}
+
+
+td {
+  padding: 5px !important;
+  text-align: right !important;
+  border-bottom-style: none !important;
+}
+
+
+
+
+
+table {
+  width: 100%;
+  border-radius: 4px;
+  overflow: hidden;
+  font-size: 40px;
+  margin-top: 20px;
+  padding: 0px;
+}
+
+tr:nth-child(even) {
+  background: white
+}
+
+tr:nth-child(odd) {
+  background: #d3d3d3;
+}
+
+tr:nth-child(even):hover {
+  background: #B0E5DA;
+
+}
+
+tr:nth-child(odd):hover {
+  background: #B0E5DA;
+
+}
+
+:host { height: 100%; overflow-y: auto; }

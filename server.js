@@ -1,12 +1,14 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
+const cors = require('cors')
 const config = require('config');
 
 const app = express();
 
 // Bodyparser Middleware
 app.use(express.json());
+app.use(cors())
 
 // DB Config
 const db = config.get('mongoURI');
@@ -17,7 +19,8 @@ mongoose
   .connect(db, { 
     useNewUrlParser: true,
     useCreateIndex: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useFindAndModify: false
   }) // Adding new mongo url parser
   .then(() => console.log('MongoDB Connected...'))
   .catch(err => console.log(err));

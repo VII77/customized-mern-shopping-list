@@ -1,0 +1,31 @@
+<div class="container mt-5">
+  <mat-card>
+    <table class="users-table mat-elevation-z8" mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="number">
+        <th mat-header-cell *matHeaderCellDef>Number</th>
+        <td mat-cell *matCellDef="let element; let i = index">{{i + 1}}</td>
+      </ng-container>
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+      <ng-container matColumnDef="role">
+        <th mat-header-cell *matHeaderCellDef>Role</th>
+        <td mat-cell color="primary" *matCellDef="let element"> {{Role[element.role]}} </td>
+      </ng-container>
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef>Action</th>
+        <td mat-cell *matCellDef="let element"> <button class="assign-role-button" *ngIf="element.role== Role.User" mat-raised-button color="primary" type="button"  (click)="assignAdmin(element)">
+         Assign Admin
+        </button>
+        <button class="assign-role-button" *ngIf="element.role== Role.Admin" mat-raised-button color="primary" type="button" (click)="assignUser(element)">
+          Assign User
+         </button></td>
+      </ng-container>
+
+      <tr color="primary" mat-row *matRowDef="let row; columns: ['number','name', 'role', 'action'];"></tr>
+    </table>
+
+  </mat-card>
+
+  </div>

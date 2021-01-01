@@ -1,0 +1,44 @@
+.router-link-active {
+  background: green;
+  color: black;
+}
+
+
+.mat-drawer {
+  min-width: 240px;
+  background:  #d3d3d3;
+
+}
+
+
+.mat-list-base {
+  padding-top: 0px !important;
+}
+
+.mat-list-item:hover {
+  background: yellow;
+  color: black
+}
+
+.mat-list-item {
+  font-family: Roboto Condensed;
+  font-size: 20px !important;
+
+  height: 60px;
+  color: white;
+  background-color: #d3d3d3;
+  }
+
+
+  h1 {
+    font-family: Roboto Condensed;
+    font-size: 30px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .mat-selection-list {
+    margin-top: 0px;
+  }
+
+

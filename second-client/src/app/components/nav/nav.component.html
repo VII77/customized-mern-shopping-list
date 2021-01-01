@@ -1,0 +1,35 @@
+<mat-toolbar color="primary">
+  <div fxHide.gt-md>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"
+      (click)="isMenuCollapsed = !isMenuCollapsed" >
+      <mat-icon>menu</mat-icon>
+    </button>
+  </div>
+    <div fxHide.lt-lg>
+      <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"
+      (click)="onMenuClicked()">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </div>
+
+  <span class="brand ml-2">rou99</span>
+  <span class="spacer"></span>
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+    <mat-icon class="large-icon">account_box</mat-icon>
+  </button>
+</mat-toolbar>
+
+<div class="menu-entries" [ngbCollapse]="isMenuCollapsed" fxHide.gt-md>
+  <mat-selection-list #shoes [multiple]="false" color="primary">
+    <mat-list-option [value]="'shoe'">
+      Car
+    </mat-list-option>
+    <mat-list-option [value]="'bppt'">
+      Computer
+    </mat-list-option>
+    <mat-divider></mat-divider>
+    <mat-list-option [value]="'lala'">
+      Stuff
+    </mat-list-option>
+  </mat-selection-list>
+</div>

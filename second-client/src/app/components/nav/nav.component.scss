@@ -1,0 +1,53 @@
+
+
+
+.brand {
+  font-family: Roboto Condensed;
+  font-size: 30px !important;
+  color: white;
+}
+
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.large-icon {
+  font-size: 35px !important;
+}
+
+
+
+
+
+.menu-entries {
+  position: fixed;
+  box-shadow: inset 0 7px 10px -7px black;
+  width: 100%;
+}
+
+.mat-list-base {
+  padding-top: 0px;
+}
+
+.mat-list-item:first-child {
+  box-shadow: inset 0 7px 10px -7px black;
+}
+
+.mat-list-item {
+  font-family: Roboto Condensed;
+  font-weight: 500;
+  font-size: 20px !important;
+  height: auto;
+  color: black;
+  background-color: #d3d3d3;
+  }
+
+  .mat-list-item:hover {
+    background: yellow;
+    color: black
+  }
+
+
+
+

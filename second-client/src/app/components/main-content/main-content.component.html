@@ -1,0 +1,33 @@
+<mat-drawer-container>
+  <mat-drawer class="mat-elevation-z8"  #drawer mode="side" fixedInViewport="true">
+    <div fxLayout="row" fxLayoutAlign="space-between">
+      <span class="ml-4 mt-4 mb-4" fxFlex><h1 class="mt-3 mb-4">Menu</h1></span>
+      <button  mat-icon-button class="close-button" aria-label="close icon-button with close-icon"
+      (click)="drawer.toggle()">
+      <mat-icon>close</mat-icon>
+    </button>
+    </div>
+
+
+
+
+    <mat-selection-list [multiple]="false" color="primary">
+
+      <mat-list-option [value]="'userManager'" [routerLink]="['/routePath']" routerLinkActive="router-link-active">
+       <span class="pl-3">User Manager</span>
+      </mat-list-option>
+      <mat-list-option [value]="'articles'" [routerLink]="['/routePath']" routerLinkActive="router-link-active">
+        <span class="pl-3">Articles</span>
+      </mat-list-option>
+      <mat-list-option [value]="'options'" [routerLink]="['/routePath']" routerLinkActive="router-link-active">
+        <span class="pl-3">Options</span>
+      </mat-list-option>
+    </mat-selection-list>
+    <mat-list>
+    </mat-list>
+  </mat-drawer>
+
+  <mat-drawer-content  [style.height]="'86vh'">
+      <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>

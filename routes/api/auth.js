@@ -102,20 +102,4 @@ router.post('/register', (req, res) => {
     })
 });
 
-router.patch('/updateRole', (req, res) => {
-  const { _id, role } = req.body;
-  User.findOneAndUpdate({_id}, { $set: {role: role} }, { upsert: true, new: true }, (err, user) => {
-    if(!user) return res.status(400).json({ msg: 'Update failed' });
-
-    res.json({
-      user: {
-        id: user.id,
-        name: user.name,
-        email: user.email, 
-        role: user.role
-      }
-    });
-  });
-});
-
 module.exports = router;
